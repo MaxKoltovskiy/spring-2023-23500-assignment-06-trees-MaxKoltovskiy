@@ -63,6 +63,54 @@ void BSTree::insert(int n, Node *p, Node *trailer) {
     }
 }
 
+void BSTree::deletion(int n) {
+    Node *walker = root;
+    Node *trailer = nullptr;
+
+    while(walker -> getData() != n) {
+        trailer = walker;
+
+        if(n > walker -> getData()) {
+            walker = walker -> getRight();
+        } else {
+            walker = walker -> getLeft();
+        }
+    }
+
+    if(walker -> getLeft() != nullptr && walker -> getRight() != nullptr) {
+
+        Node *rep = walker -> getLeft();
+
+        while(rep ->getRight() != nullptr) {
+            rep = rep -> getRight();
+        }
+
+        int d = rep -> getData();
+        deletion(d);
+        walker -> setData(d);
+    } else {
+        if(trailer == nullptr) {
+            delete walker;
+            walker = nullptr;
+        } else if(trailer->getData() > walker->getData()) {
+            if(walker -> getLeft() != nullptr) {
+                trailer -> setLeft(walker -> getLeft());
+                delete walker;
+            } else {
+                trailer -> setLeft(walker -> getRight());
+                delete walker;
+            }
+        } else {
+            if(walker -> getLeft() != nullptr) {
+                trailer -> setRight(walker -> getLeft());
+                delete walker;
+            } else {
+                trailer -> setRight(walker -> getRight());
+                delete walker;
+            }
+        }
+    }
+}
 
 Node *BSTree::getRoot() {
     return root;

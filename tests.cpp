@@ -42,3 +42,33 @@ TEST_CASE("rsearch"){
 
     CHECK(b->rsearch(2) == 2);
 }
+TEST_CASE("delete"){
+    BSTree *b = new BSTree();
+
+    b->insert(1);
+    b->insert(3);
+    b->insert(7);
+    b->insert(4);
+    b->insert(2);
+
+    b->deletion(2);
+    CHECK(b->getRoot()->getRight()->getLeft() == nullptr);
+    
+    b->deletion(7);
+    CHECK(b->getRoot()->getRight()->getRight()->getData() == 4);
+
+    b->insert(-2);
+    b->insert(-1);
+    b->insert(0);
+
+    b->deletion(1);
+    CHECK(b->getRoot() -> getData() == 0);
+    CHECK(b -> getRoot() -> getLeft() -> getRight() -> getRight() == nullptr );
+
+    b->insert(2);
+
+    b->deletion(3);
+    CHECK(b->getRoot() -> getRight() -> getData() == 2);
+    CHECK(b -> getRoot() -> getRight() -> getLeft() == nullptr);
+
+}
