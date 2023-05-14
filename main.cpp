@@ -26,5 +26,8 @@ int main() {
         }
     }
 
+    std::cout<< "There are "<< tree -> count_leaves() << " leaves in this tree\n";
+    std::cout<< "The sum at level 2 of this tree is "<< tree->level_sum(2)<< "\n";
+
     return 0;
 }

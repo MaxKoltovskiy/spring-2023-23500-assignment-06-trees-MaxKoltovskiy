@@ -72,3 +72,35 @@ TEST_CASE("delete"){
     CHECK(b -> getRoot() -> getRight() -> getLeft() == nullptr);
 
 }
+TEST_CASE("Count Leaves"){
+    BSTree *b = new BSTree();
+
+    b->insert(5);
+    CHECK(b->count_leaves() == 1);
+
+    b->insert(3);
+    b->insert(2);
+    b->insert(4);
+    b->insert(6);
+    b->insert(7);
+
+    CHECK(b->count_leaves() == 3);
+
+    BSTree *tree = new BSTree();
+
+}
+TEST_CASE("Level Sum"){
+    BSTree *b = new BSTree();
+
+    b->insert(5);
+    b->insert(3);
+    b->insert(2);
+    b->insert(4);
+    b->insert(7);
+    b->insert(6);
+    b->insert(8);
+
+    CHECK(b->level_sum(3) == 20);
+    CHECK(b->level_sum(2) == 10);
+    CHECK(b->level_sum(1) == 5);
+}

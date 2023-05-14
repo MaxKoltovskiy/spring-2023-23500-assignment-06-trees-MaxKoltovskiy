@@ -112,6 +112,47 @@ void BSTree::deletion(int n) {
     }
 }
 
+int BSTree::count_leaves() {
+    return count_leaves(root);
+}
+
+int BSTree::count_leaves(Node *p) {
+    int leaves = 0;
+    if(p -> getLeft() == nullptr && p -> getRight() == nullptr) {
+        leaves++;
+    }
+
+    if(p->getLeft() != nullptr) {
+        leaves += count_leaves(p->getLeft());
+    }
+    if(p->getRight() != nullptr) {
+        leaves += count_leaves(p->getRight());
+    }
+
+    return leaves;
+}
+
+int BSTree::level_sum(int level) { // assuming root is level 1
+    return level_sum(level, root, 1);
+}
+
+int BSTree::level_sum(int level, Node *p, int curr_lev) {
+    int sum = 0;
+
+    if(curr_lev == level) {
+        return p->getData();
+    }
+    
+    if(p->getLeft() != nullptr) {
+        sum += level_sum(level, p->getLeft(), curr_lev+1);
+    }
+    if(p->getRight() != nullptr) {
+        sum += level_sum(level, p->getRight(), curr_lev+1);
+    }
+
+    return sum;
+
+}
 Node *BSTree::getRoot() {
     return root;
 }
